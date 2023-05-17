@@ -121,11 +121,11 @@ impl FeatureInfo {
     pub fn from_code(code: FeatureCode, version: MccsVersion) -> ::Result<Self> {
         unsafe {
             let mut res = mem::uninitialized();
-            Error::from_status(sys::ddca_get_feature_info_by_vcp_version(
+            Error::from_status(sys::ddca_get_feature_metadata_by_vspec(
                 code, version.id().unwrap_or(sys::DDCA_VANY), &mut res
             ))?;
             let features = Self::from_raw(&*res);
-            Error::from_status(sys::ddca_free_feature_info(res))?;
+            // Error::from_status(sys::ddca_free_feature_info(res))?;
             Ok(features)
         }
     }

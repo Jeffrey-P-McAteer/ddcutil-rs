@@ -286,7 +286,7 @@ impl Display {
     pub fn vcp_get_value(&self, code: FeatureCode) -> ::Result<Value> {
         unsafe {
             let mut raw = mem::uninitialized();
-            Error::from_status(sys::ddca_get_any_vcp_value(
+            Error::from_status(sys::ddca_get_any_vcp_value_using_explicit_type(
                 self.handle, code as _, sys::DDCA_NON_TABLE_VCP_VALUE_PARM, &mut raw
             ))?;
             let raw = &mut *raw;
@@ -303,7 +303,7 @@ impl Display {
     pub fn vcp_get_table(&self, code: FeatureCode) -> ::Result<Vec<u8>> {
         unsafe {
             let mut raw = mem::uninitialized();
-            Error::from_status(sys::ddca_get_any_vcp_value(
+            Error::from_status(sys::ddca_get_any_vcp_value_using_explicit_type(
                 self.handle, code as _, sys::DDCA_TABLE_VCP_VALUE_PARM, &mut raw
             ))?;
             let raw = &mut *raw;

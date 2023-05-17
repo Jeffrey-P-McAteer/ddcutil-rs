@@ -61,7 +61,14 @@ extern {
         depth: c_int,
     );
 
-    pub fn ddca_get_feature_info_by_vcp_version(
+    // pub fn ddca_get_feature_info_by_vcp_version(
+    //     feature_code: DDCA_Vcp_Feature_Code,
+    //     mccs_version_id: DDCA_MCCS_Version_Id,
+    //     p_info: *mut *mut DDCA_Version_Feature_Info,
+    // ) -> DDCA_Status;
+    // ^^ Replace w/ ddca_get_feature_metadata_by_vspec, or ddca_get_feature_metadata_by_dref, or ddca_get_feature_metadata_by_dh
+
+    pub fn ddca_get_feature_metadata_by_vspec(
         feature_code: DDCA_Vcp_Feature_Code,
         mccs_version_id: DDCA_MCCS_Version_Id,
         p_info: *mut *mut DDCA_Version_Feature_Info,
@@ -82,7 +89,8 @@ extern {
         p_feature_name: *mut *mut c_char,
     ) -> DDCA_Status;
 
-    pub fn ddca_free_feature_info(info: *mut DDCA_Version_Feature_Info) -> DDCA_Status;
+    //pub fn ddca_free_feature_info(info: *mut DDCA_Version_Feature_Info) -> DDCA_Status;
+    // Deprecated, no replacement?
 
     pub fn ddca_get_mccs_version(
         ddca_dh: DDCA_Display_Handle,
@@ -104,7 +112,15 @@ extern {
         table_value_response: *mut DDCA_Table_Value,
     );
 
-    pub fn ddca_get_any_vcp_value(
+    // pub fn ddca_get_any_vcp_value(
+    //     ddca_dh: DDCA_Display_Handle,
+    //     feature_code: DDCA_Vcp_Feature_Code,
+    //     value_type: DDCA_Vcp_Value_Type_Parm,
+    //     pvalrec: *mut *mut DDCA_Any_Vcp_Value,
+    // ) -> DDCA_Status;
+
+    // Replaced by ddca_get_any_vcp_value_using_explicit_type and ddca_get_any_vcp_value_using_implicit_type
+    pub fn ddca_get_any_vcp_value_using_explicit_type(
         ddca_dh: DDCA_Display_Handle,
         feature_code: DDCA_Vcp_Feature_Code,
         value_type: DDCA_Vcp_Value_Type_Parm,
